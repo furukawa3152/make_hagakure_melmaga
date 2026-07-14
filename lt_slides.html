@@ -133,6 +133,67 @@
       object-fit: contain;
       filter: drop-shadow(0 12px 24px rgba(61, 90, 59, 0.12));
     }
+    .layout-melmaga {
+      grid-template-columns: 1fr 1.05fr;
+      gap: 2.5vw;
+      align-items: center;
+    }
+    .melmaga-panel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 0;
+    }
+    .melmaga-panel img {
+      width: auto;
+      max-width: min(100%, 460px);
+      max-height: min(68vh, 520px);
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow:
+        0 4px 8px rgba(61, 90, 59, 0.06),
+        0 16px 36px rgba(61, 90, 59, 0.14);
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    @media (max-width: 800px) {
+      .layout-melmaga { grid-template-columns: 1fr; }
+      .melmaga-panel { order: -1; }
+      .melmaga-panel img {
+        max-height: min(36vh, 280px);
+        max-width: min(100%, 240px);
+      }
+    }
+    .code-slide {
+      justify-content: flex-start;
+      padding-top: 5vh;
+    }
+    .code-slide .code-lead {
+      margin-bottom: 1.1rem;
+      max-width: 42em;
+    }
+    .code-shot {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+    }
+    .code-shot img {
+      width: 100%;
+      max-width: 1100px;
+      max-height: min(58vh, 520px);
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      box-shadow:
+        0 4px 8px rgba(61, 90, 59, 0.06),
+        0 16px 36px rgba(61, 90, 59, 0.12);
+      background: #fff;
+    }
     .char-corner {
       position: absolute;
       right: 3vw;
@@ -240,6 +301,62 @@
       letter-spacing: .08em;
       transform: rotate(-3deg);
     }
+    .event-label {
+      position: absolute;
+      left: 6vw;
+      bottom: 9vh;
+      color: var(--muted);
+      font-size: clamp(13px, 1.6vw, 17px);
+      font-weight: 700;
+      letter-spacing: .06em;
+    }
+    .profile-name {
+      font-size: clamp(28px, 4.5vw, 46px);
+      font-weight: 800;
+      color: var(--sage-deep);
+      line-height: 1.25;
+      margin-bottom: .35rem;
+    }
+    .profile-reading {
+      color: var(--sage-dark);
+      font-size: clamp(14px, 1.9vw, 20px);
+      font-weight: 700;
+      letter-spacing: .12em;
+      margin-bottom: 1.1rem;
+    }
+    .profile-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin: .9rem 0 1.1rem;
+    }
+    .profile-tags span {
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--sage-deep);
+      padding: .35rem .75rem;
+      border-radius: 999px;
+      font-size: clamp(12px, 1.5vw, 15px);
+      font-weight: 700;
+    }
+    .profile-panel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 40vh;
+    }
+    .profile-panel img {
+      max-height: min(62vh, 480px);
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      box-shadow:
+        0 8px 20px rgba(61, 90, 59, 0.1),
+        0 20px 40px rgba(184, 80, 72, 0.08);
+      background: #fff;
+    }
   </style>
 </head>
 <body>
@@ -260,9 +377,37 @@
           <img src="images/voice-samurai-02-wave.png" alt="手を振る侍">
         </div>
       </div>
+      <p class="event-label">2026.7.17焼き肉LT会＠南大門</p>
     </section>
 
-    <!-- 2 いちばん言いたいこと -->
+    <!-- 2 自己紹介 -->
+    <section class="slide">
+      <div class="layout">
+        <div>
+          <p class="eyebrow">自己紹介</p>
+          <p class="profile-name">古川　格</p>
+          <p class="profile-reading">ふるかわ　いたる</p>
+          <ul>
+            <li>9歳双子の父</li>
+            <li>最近仕事ばっかりしている</li>
+            <li>Obsidianのライフログが少しずつ溜まってきた</li>
+            <li>お肉大好き。けど年齢的に脂身はしんどくなってきた</li>
+          </ul>
+          <div class="profile-tags">
+            <span>Python</span>
+            <span>Cursor</span>
+            <span>コーヒー</span>
+            <span>Guitar</span>
+            <span>カメラ</span>
+          </div>
+        </div>
+        <div class="profile-panel">
+          <img src="images/self_image.jpeg" alt="古川格のイラスト">
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 いちばん言いたいこと -->
     <section class="slide">
       <div class="layout">
         <div>
@@ -402,20 +547,60 @@
 
     <!-- 9 チップス -->
     <section class="slide">
-      <p class="eyebrow">08 · チップス</p>
-      <h2>サイトの画像を、メールからURLで参照する</h2>
-      <ul style="max-width: 34em;">
-        <li>本文HTMLの中で、HAGAKURE PROGRAMMING塾のウェブサイト上の画像を直接URL参照している</li>
-        <li>添付ファイルにしなくても、公開URLを <code>img src</code> に書けば使える</li>
-        <li>ロゴや侍イラストなど、サイト側の素材をメールでも再利用できる</li>
-      </ul>
-      <p class="note">運用のコツ：画像は「メールに載せる」より「公開URLを指す」。</p>
-      <div class="char-corner">
-        <img src="images/voice-samurai-03-point.png" alt="指差し侍">
+      <div class="layout layout-melmaga">
+        <div>
+          <p class="eyebrow">08 · チップス</p>
+          <h2>サイトの画像を、メールからURLで参照する</h2>
+          <ul>
+            <li>本文HTMLの中で、HAGAKURE PROGRAMMING塾のウェブサイト上の画像を直接URL参照している</li>
+            <li>添付ファイルにしなくても、公開URLを <code>img src</code> に書けば使える</li>
+            <li>ロゴや侍イラストなど、サイト側の素材をメールでも再利用できる</li>
+          </ul>
+          <p class="note">運用のコツ：画像は「メールに載せる」より「公開URLを指す」。</p>
+        </div>
+        <div class="melmaga-panel">
+          <img src="images/melmaga.png" alt="HAGAKUREメルマガの画面">
+        </div>
       </div>
     </section>
 
-    <!-- 10 まとめ -->
+    <!-- 10 コード例 -->
+    <section class="slide code-slide">
+      <p class="eyebrow">08 · チップス</p>
+      <h2>コードだとこんな感じ</h2>
+      <div class="code-lead">
+        <ul>
+          <li>ヘッダーのロゴも、<code>img src</code> にサイト上の公開URLを指定しているだけ</li>
+          <li>メール本文に画像ファイルを埋め込まず、参照する形で済ませている</li>
+        </ul>
+        <p class="key">例：<code>https://hagakurepgm.net/static/images/logo....png</code></p>
+      </div>
+      <div class="code-shot">
+        <img src="images/code.png" alt="メルマガHTMLでロゴをURL参照しているコード">
+      </div>
+    </section>
+
+    <!-- 11 チップス2：分割送信 -->
+    <section class="slide">
+      <div class="layout">
+        <div>
+          <p class="eyebrow">09 · チップス</p>
+          <h2>Gmailは1日100件まで。だから分割送信にした</h2>
+          <ul>
+            <li>Gmailの送信上限はだいたい1日100件</li>
+            <li>1回の実行では最大100件まで送り、送った宛先はログに残す</li>
+            <li>次回実行時は「まだ送っていない宛先」だけを対象にする</li>
+            <li>残りがあれば再度実行して、上限をまたぎながら送り切る</li>
+          </ul>
+          <p class="key">上限を回避するより、「どこまで送ったか」を残して再開する設計。</p>
+        </div>
+        <div class="char-panel">
+          <img src="images/voice-samurai-08-desktop_pc.png" alt="デスクトップPCの侍">
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 まとめ -->
     <section class="slide center">
       <p class="eyebrow">まとめ</p>
       <p class="big-line" style="margin: 0 auto;">

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HAGAKUREメルマガ始めました。</title>
+  <style>
+    :root {
+      --bg: #f3f6f1;
+      --bg-deep: #e8efe6;
+      --card: #ffffff;
+      --ink: #3a3a3a;
+      --muted: #6b7a6e;
+      --sage: #7a9a78;
+      --sage-dark: #4f6f4d;
+      --sage-deep: #3d5a3b;
+      --blush: #e8a8a0;
+      --blush-soft: #f5d6d2;
+      --line: #c5d4c3;
+      --shadow: rgba(61, 90, 59, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      overflow: hidden;
+    }
+    .deck { height: 100%; position: relative; }
+    .slide {
+      display: none;
+      height: 100%;
+      padding: 6vh 6vw 8vh;
+      position: relative;
+      flex-direction: column;
+      justify-content: center;
+      background:
+        radial-gradient(ellipse at 10% 0%, #eef4ec 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 100%, #f7ecea 0%, transparent 40%),
+        var(--bg);
+    }
+    .slide.active { display: flex; animation: in .28s ease; }
+    @keyframes in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    .eyebrow {
+      color: var(--sage-dark);
+      font-size: clamp(13px, 1.8vw, 18px);
+      letter-spacing: .14em;
+      font-weight: 700;
+      margin-bottom: .85rem;
+    }
+    h1 {
+      font-size: clamp(28px, 5vw, 52px);
+      line-height: 1.28;
+      color: var(--sage-deep);
+      font-weight: 800;
+      margin-bottom: .9rem;
+    }
+    h2 {
+      font-size: clamp(24px, 3.8vw, 40px);
+      line-height: 1.3;
+      color: var(--sage-deep);
+      font-weight: 800;
+      margin-bottom: 1.1rem;
+      max-width: 16em;
+    }
+    p, li {
+      font-size: clamp(16px, 2.2vw, 24px);
+      line-height: 1.65;
+      color: var(--ink);
+    }
+    .sub {
+      color: var(--muted);
+      font-size: clamp(14px, 1.9vw, 20px);
+      line-height: 1.6;
+    }
+    ul { margin: .2rem 0 0 1.15em; }
+    li { margin: .4em 0; }
+    .key {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: .85rem 1.2rem;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--sage);
+      border-radius: 0 12px 12px 0;
+      box-shadow: 0 8px 24px var(--shadow);
+      font-size: clamp(15px, 2vw, 22px);
+      font-weight: 700;
+      color: var(--sage-deep);
+      max-width: 36em;
+    }
+    .note {
+      margin-top: 1rem;
+      padding: .75rem 1.1rem;
+      background: var(--blush-soft);
+      border-radius: 12px;
+      color: #7a4a46;
+      font-size: clamp(14px, 1.8vw, 18px);
+      max-width: 34em;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: 2vw;
+      align-items: center;
+      width: 100%;
+    }
+    .layout-wide {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1100px;
+    }
+    @media (max-width: 800px) {
+      .layout, .layout-wide { grid-template-columns: 1fr; }
+      .char-panel { order: -1; max-height: 28vh; }
+    }
+    .char-panel {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      min-height: 40vh;
+    }
+    .char-panel img {
+      max-height: min(52vh, 420px);
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 24px rgba(61, 90, 59, 0.12));
+    }
+    .char-corner {
+      position: absolute;
+      right: 3vw;
+      bottom: 7vh;
+      width: min(22vw, 200px);
+      pointer-events: none;
+      opacity: .95;
+    }
+    .char-corner img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 8px 16px rgba(61, 90, 59, 0.12));
+    }
+    .char-corner.left {
+      right: auto;
+      left: 3vw;
+    }
+    .chars-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
+    }
+    .chars-row img {
+      height: min(18vh, 140px);
+      width: auto;
+      filter: drop-shadow(0 6px 12px rgba(61, 90, 59, 0.1));
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.1rem 1.25rem;
+      box-shadow: 0 8px 20px var(--shadow);
+    }
+    .card .label {
+      color: var(--sage-dark);
+      font-weight: 800;
+      font-size: clamp(14px, 1.7vw, 18px);
+      margin-bottom: .45rem;
+    }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .55rem;
+      margin-top: 1.1rem;
+    }
+    .pill {
+      background: var(--sage);
+      color: #fff;
+      padding: .45rem .95rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: clamp(13px, 1.7vw, 17px);
+    }
+    .arrow { color: var(--sage-dark); font-weight: 800; }
+    .center { text-align: center; align-items: center; }
+    .title-brand {
+      color: var(--sage-dark);
+      font-size: clamp(13px, 1.7vw, 17px);
+      letter-spacing: .08em;
+      font-weight: 700;
+      margin-bottom: .6rem;
+    }
+    .big-line {
+      font-size: clamp(26px, 4.2vw, 44px);
+      font-weight: 800;
+      color: var(--sage-deep);
+      line-height: 1.35;
+      max-width: 16em;
+    }
+    .footer-bar {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .55rem 1.2rem;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(243, 246, 241, .88);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(6px);
+      z-index: 20;
+    }
+    .progress {
+      position: fixed;
+      top: 0; left: 0; height: 3px;
+      background: linear-gradient(90deg, var(--sage), var(--blush));
+      z-index: 21;
+      transition: width .2s;
+    }
+    .stamp {
+      display: inline-block;
+      margin-top: .8rem;
+      padding: .25rem .7rem;
+      border: 2px solid var(--blush);
+      color: #b56b64;
+      border-radius: 6px;
+      font-size: clamp(12px, 1.5vw, 15px);
+      font-weight: 800;
+      letter-spacing: .08em;
+      transform: rotate(-3deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="deck" id="deck">
+
+    <!-- 1 タイトル -->
+    <section class="slide active">
+      <div class="layout">
+        <div>
+          <p class="title-brand">HAGAKURE PROGRAMMING塾 · LT</p>
+          <h1>HAGAKUREメルマガ始めました。</h1>
+          <p class="sub">
+            大量コンテキストをAIに渡すことが普通になったなぁと思う話
+          </p>
+        </div>
+        <div class="char-panel">
+          <img src="images/voice-samurai-02-wave.png" alt="手を振る侍">
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 いちばん言いたいこと -->
+    <section class="slide">
+      <div class="layout">
+        <div>
+          <p class="eyebrow">01 · 今日いちばん言いたいこと</p>
+          <p class="big-line">
+            1年前より、<br>
+            大量のコンテキストを<br>
+            AIに投げて処理させるのが<br>
+            当たり前になってきた。
+          </p>
+          <p class="key">この変化の上に、今回のメルマガがある。</p>
+        </div>
+        <div class="char-panel">
+          <img src="images/voice-samurai-03-point.png" alt="指を指す侍">
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 きっかけ -->
+    <section class="slide">
+      <div class="layout">
+        <div>
+          <p class="eyebrow">02 · きっかけ</p>
+          <h2>昔作ったスクリプトを、久しぶりに動かした</h2>
+          <ul>
+            <li>Slack APIで一定期間のログを取るスクリプトは、結構前からあった</li>
+            <li>久しぶりに開いて実行すると、大量のメッセージが取れた</li>
+            <li>材料としての「長いログ」が手元に揃った</li>
+          </ul>
+        </div>
+        <div class="char-panel">
+          <img src="images/voice-samurai-06-sleepy.png" alt="眠そうな侍">
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 気づき -->
+    <section class="slide">
+      <div class="layout">
+        <div>
+          <p class="eyebrow">03 · 気づき（スタート）</p>
+          <h2>今のAIなら、この量を一括でいける</h2>
+          <ul>
+            <li>この量＝Slack1ヶ月分でだいたい<strong>5,000行</strong>ぐらい</li>
+            <li>2026年の性能なら、このくらいのコンテキストをまとめて処理できる</li>
+            <li>「いろんなことに使えるな」と思った</li>
+            <li><strong>ここがスタート</strong>（最初からメルマガありきではなかった）</li>
+          </ul>
+          <p class="key">長いコンテキストが取れた瞬間に、用途が開き始めた。</p>
+        </div>
+        <div class="char-panel">
+          <img src="images/voice-samurai-04-surprised.png" alt="驚く侍">
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 使い道 -->
+    <section class="slide">
+      <div class="layout">
+        <div>
+          <p class="eyebrow">04 · 使い道</p>
+          <h2>久しぶりの人向けの活動メルマガ</h2>
+          <ul>
+            <li>何に使うかを考えた</li>
+            <li>最近参加していない人に、最近の活動を見せたい</li>
+            <li>興味を持ってもらう・戻ってきてもらう入口になるのでは</li>
+          </ul>
+          <p class="note">目的は「技術デモ」ではなく、コミュニティへの情報の届け方。</p>
+        </div>
+        <div class="char-panel">
+          <img src="images/voice-samurai-01-idle.png" alt="正面の侍">
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 運営と一緒に -->
+    <section class="slide">
+      <div class="layout">
+        <div>
+          <p class="eyebrow">05 · 人と方針を決める</p>
+          <h2>運営メンバーと内容を考えた</h2>
+          <ul>
+            <li>誰向けか、何を載せるか、どこまで書くか</li>
+            <li>トーンや見せ方を、他の運営メンバーと擦り合わせた</li>
+          </ul>
+          <p class="key">長いログの処理はAI、コミュニティの文脈は人。</p>
+        </div>
+        <div class="char-panel">
+          <img src="images/voice-samurai-05-thinking.png" alt="考える侍">
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 本文HTML -->
+    <section class="slide">
+      <div class="layout">
+        <div>
+          <p class="eyebrow">06 · 本文</p>
+          <h2>HTML形式のメールとして作らせた</h2>
+          <ul>
+            <li>取得したログを材料にする</li>
+            <li>運営で決めた方針を踏まえて本文化</li>
+            <li>メルマガ用のHTMLとしてAIに作成させた</li>
+          </ul>
+          <div class="flow">
+            <span class="pill">長いログ</span>
+            <span class="arrow">→</span>
+            <span class="pill">方針</span>
+            <span class="arrow">→</span>
+            <span class="pill">HTML本文</span>
+          </div>
+        </div>
+        <div class="char-panel">
+          <img src="images/voice-samurai-07-laptop.png" alt="ノートPCの侍">
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 GAS配信 -->
+    <section class="slide">
+      <div class="layout">
+        <div>
+          <p class="eyebrow">07 · 配信</p>
+          <h2>GASで配信システムを組んだ</h2>
+          <ul>
+            <li>メルマガ配信もGASで組めるのでは、と思いAIに実装してもらった</li>
+            <li>配信停止希望が来たら、GASで取得してリストへ追加</li>
+            <li>リストに載ったメールアドレスには送らない</li>
+          </ul>
+          <p class="key">作るだけでなく、「送らない」まで含めて運用になる。</p>
+        </div>
+        <div class="char-panel">
+          <img src="images/voice-samurai-08-desktop_pc.png" alt="デスクトップPCの侍">
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 チップス -->
+    <section class="slide">
+      <p class="eyebrow">08 · チップス</p>
+      <h2>サイトの画像を、メールからURLで参照する</h2>
+      <ul style="max-width: 34em;">
+        <li>本文HTMLの中で、HAGAKURE PROGRAMMING塾のウェブサイト上の画像を直接URL参照している</li>
+        <li>添付ファイルにしなくても、公開URLを <code>img src</code> に書けば使える</li>
+        <li>ロゴや侍イラストなど、サイト側の素材をメールでも再利用できる</li>
+      </ul>
+      <p class="note">運用のコツ：画像は「メールに載せる」より「公開URLを指す」。</p>
+      <div class="char-corner">
+        <img src="images/voice-samurai-03-point.png" alt="指差し侍">
+      </div>
+    </section>
+
+    <!-- 10 まとめ -->
+    <section class="slide center">
+      <p class="eyebrow">まとめ</p>
+      <p class="big-line" style="margin: 0 auto;">
+        長いコンテキストを投げられるようになった。<br>
+        前提を変えて試すと、今まで発想できなかったことができる。
+      </p>
+          <ul style="max-width: 36em; margin: 1.2rem auto 0; text-align: left;">
+        <li>活用はメルマガだけじゃない</li>
+        <li><strong>NINJA-KUN</strong>：週間のSlackまとめ配信、ブログネタ候補の投稿BOT</li>
+        <li>他にもアイデアを出していきたい</li>
+      </ul>
+      <p class="key" style="margin-top: 1rem;">またアイデアあれば教えてください。</p>
+      <div class="chars-row">
+        <img src="images/voice-samurai-09-celebrate.png" alt="喜ぶ侍">
+        <img src="images/voice-samurai-02-wave.png" alt="手を振る侍">
+        <img src="images/voice-samurai-01-idle.png" alt="正面の侍">
+      </div>
+      <p class="sub" style="margin-top: .6rem;">ご清聴ありがとうございました</p>
+    </section>
+
+  </div>
+
+  <div class="footer-bar">
+    <span>← → / Space · Escで先頭</span>
+    <span id="page">1 / 10</span>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    let i = 0;
+    const page = document.getElementById("page");
+    const progress = document.getElementById("progress");
+
+    function show(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+      page.textContent = `${i + 1} / ${slides.length}`;
+      progress.style.width = `${((i + 1) / slides.length) * 100}%`;
+    }
+    function next() { show(i + 1); }
+    function prev() { show(i - 1); }
+
+    document.addEventListener("keydown", (e) => {
+      if (["ArrowRight", "ArrowDown", " ", "Enter", "PageDown"].includes(e.key)) {
+        e.preventDefault(); next();
+      } else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(e.key)) {
+        e.preventDefault(); prev();
+      } else if (e.key === "Home" || e.key === "Escape") {
+        e.preventDefault(); show(0);
+      } else if (e.key === "End") {
+        e.preventDefault(); show(slides.length - 1);
+      }
+    });
+    document.getElementById("deck").addEventListener("click", (e) => {
+      if (e.clientX > window.innerWidth * 0.35) next();
+      else prev();
+    });
+    show(0);
+  </script>
+</body>
+</html>

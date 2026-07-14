@@ -1,0 +1,162 @@
+<div style="background:#f6fbf7; padding:20px 0; font-family: Arial, 'Hiragino Sans', Meiryo, sans-serif;">
+
+<table align="center" width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:10px; overflow:hidden; border:1px solid #e0efe5;">
+
+  <!-- ヘッダー -->
+  <tr>
+    <td style="background:#e8f5e9; text-align:center; padding:25px 20px; border-bottom:3px solid #a5d6a7;">
+      
+      <img src="https://hagakurepgm.net/static/images/logo.bd5050763f1f.png" width="90" style="display:block; margin:0 auto 10px;">
+
+      <h1 style="margin:0; font-size:22px; color:#2e7d32;">
+        HAGAKURE PROGRAMMING塾 通信
+      </h1>
+
+      <p style="margin:8px 0 0; font-size:16px; font-weight:bold; color:#388e3c;">
+        2026年5月号
+      </p>
+    </td>
+  </tr>
+
+  <!-- 挨拶（ござる） -->
+  <tr>
+    <td style="padding:25px 20px;">
+
+      <table width="100%">
+        <tr>
+          <td style="vertical-align:top; padding-right:10px;">
+
+            <p style="margin-top:0; font-size:17px; line-height:1.8; color:#2e7d32; font-weight:bold;">
+              いつも見守っていただき、誠にありがとうでござる。<br>
+              このメールでは、我らの活動や最近の話題についてお届けするでござる。
+            </p>
+
+            <p style="font-size:15px; line-height:1.8; color:#333;">
+              最近 Hagakure Programming塾 の Slack は開いたでござるか？<br>
+              多くの話題で盛り上がっているので、久しぶりの者は是非 Slack を開いてみて欲しいでござる。
+            </p>
+
+            <table cellpadding="0" cellspacing="0" style="margin:12px 0;">
+              <tr>
+                <td style="background:#81c784; border-radius:6px;">
+                  <a href="https://app.slack.com/client/T02T5N5LD61/C02T1VAQRU6"
+                     style="display:inline-block; padding:10px 20px; color:#ffffff; text-decoration:none; font-weight:bold; font-size:14px;">
+                    Slackを開くでござる →
+                  </a>
+                </td>
+              </tr>
+            </table>
+
+            <p>
+              どうぞ最後までご覧くだされ！
+            </p>
+
+          </td>
+
+          <td width="120" style="text-align:center;">
+            <img src="https://hagakurepgm.net/static/images/voice/voice-samurai.73a6e84d19cc.png" width="100">
+          </td>
+        </tr>
+      </table>
+
+      <!-- 本文 -->
+      <div style="margin-top:20px; padding:16px; background:#f1f8f4; border-left:5px solid #81c784; border-radius:6px;">
+        ${mailBody}
+      </div>
+
+    </td>
+  </tr>
+
+  <!-- リンク集 -->
+  <tr>
+    <td style="padding:24px 25px; background:#f6fbf7; border-top:1px solid #e0efe5; text-align:center;">
+
+      <h2 style="margin:0 0 16px; font-size:16px; color:#2e7d32;">
+        リンク集
+      </h2>
+
+      <table align="center" cellpadding="0" cellspacing="0" width="100%" style="max-width:320px;">
+        <tr>
+          <td style="padding:6px 0;">
+            <table align="center" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="background:#81c784; border-radius:6px; text-align:center;">
+                  <a href="https://www.facebook.com/profile.php?id=100085682160764&amp;locale=ja_JP"
+                     style="display:block; padding:12px 20px; color:#ffffff; text-decoration:none; font-weight:bold; font-size:14px;">
+                    公式 Facebook
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:6px 0;">
+            <table align="center" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="background:#81c784; border-radius:6px; text-align:center;">
+                  <a href="https://x.com/hagakurepgm"
+                     style="display:block; padding:12px 20px; color:#ffffff; text-decoration:none; font-weight:bold; font-size:14px;">
+                    公式 X
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:6px 0;">
+            <table align="center" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="background:#81c784; border-radius:6px; text-align:center;">
+                  <a href="https://hagakurepgm.net/"
+                     style="display:block; padding:12px 20px; color:#ffffff; text-decoration:none; font-weight:bold; font-size:14px;">
+                    Webサイト
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:6px 0;">
+            <table align="center" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="background:#81c784; border-radius:6px; text-align:center;">
+                  <a href="https://hagakurepgm.net/blog/"
+                     style="display:block; padding:12px 20px; color:#ffffff; text-decoration:none; font-weight:bold; font-size:14px;">
+                    ブログ Scroll
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+
+  <!-- フッター -->
+  <tr>
+    <td style="padding:15px; text-align:center; font-size:12px; color:#777; border-top:1px solid #e0efe5;">
+
+      <p style="margin:0; font-weight:bold; color:#2e7d32;">
+        HAGAKURE PROGRAMMING塾
+      </p>
+
+      <p style="margin:10px 0 0; font-size:11px; color:#888; line-height:1.6;">
+        このメルマガの、参加者以外への転送はお控えくださいでござる。
+      </p>
+
+      <p style="margin:8px 0;">
+        <a href="${unsubscribeLink}" style="color:#66bb6a; text-decoration:none;">
+          配信停止はこちらでござる
+        </a>
+      </p>
+
+    </td>
+  </tr>
+
+</table>
+</div>
